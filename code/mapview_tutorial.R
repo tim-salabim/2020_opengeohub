@@ -264,3 +264,30 @@ brew = breweries
 mapview::stopWatching()
 
 rm(brew)
+
+#' ### additional useful functions
+#'
+#' #### mapshot
+#'
+mapviewOptions(fgb = FALSE)
+mymap = mapview(franconia, zcol = "district") + breweries
+mapshot(mymap, url = "/home/timpanse/Desktop/mymap.html")
+mapshot(mymap, file = "/home/timpanse/Desktop/mymap.png")
+mapshot(mymap, file = "/home/timpanse/Desktop/mymap.png",
+        remove_controls = c("zoomControl", "layersControl", "homeButton"))
+
+#' #### viewRGB
+#'
+library(plainview)
+viewRGB(poppendorf, r = 4, g = 3, b = 2)
+viewRGB(x1) # error! will need to convert to stars internally...
+
+#' #### files directly
+#'
+fl = "/home/timpanse/software/data/franconia.geojson"
+mapview(fl)
+
+#' #### tile folder
+#'
+tls = "/home/timpanse/software/tiles/bicycle-tiles/"
+mapview(tls)
