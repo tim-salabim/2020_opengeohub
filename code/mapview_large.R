@@ -6,7 +6,6 @@ library("mapview")
 library("stars")
 
 mapviewOptions(platform = "leafgl")
-mapviewGetOption("fgb")
 
 # points
 n = 5e5
@@ -49,7 +48,7 @@ tiffl = gsub(".gz", "", dsn)
 R.utils::gunzip(dsn, tiffl)
 
 chrps = read_stars(tiffl, proxy = FALSE)
-chrps[[1]][chrps[[1]] < 0] = NA
+chrps[[1]][chrps[[1]] <= 0] = NA
 
 mapview(chrps)
 
@@ -61,7 +60,7 @@ tiffl2 = gsub(".gz", "", dsn2)
 R.utils::gunzip(dsn2, tiffl2)
 
 chrps2 = read_stars(tiffl2, proxy = FALSE)
-chrps2[[1]][chrps2[[1]] < 0] = NA
+chrps2[[1]][chrps2[[1]] <= 0] = NA
 
 mapview(chrps2) | mapview(chrps)
 

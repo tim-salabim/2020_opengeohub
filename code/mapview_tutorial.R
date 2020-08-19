@@ -123,10 +123,10 @@ m
 tif = system.file("tif/L7_ETMs.tif", package = "stars")
 (x1 = read_stars(tif))
 
-mapview(x1)
+mapview(x1, band = 1)
 
-f <- system.file("external/test.grd", package="raster")
-(rst = raster(f))
+rst = as(x1, "Raster")[[1]]
+
 mapview(rst)
 
 #' ### mapview structure
@@ -279,7 +279,9 @@ mapshot(mymap, file = "/home/timpanse/Desktop/mymap.png",
 #' #### viewRGB
 #'
 library(plainview)
-viewRGB(poppendorf, r = 4, g = 3, b = 2)
+rst = as(x1, "Raster")
+viewRGB(rst)
+viewRGB(rst, r = 4, g = 3, b = 2)
 viewRGB(x1) # error! will need to convert to stars internally...
 
 #' #### files directly
