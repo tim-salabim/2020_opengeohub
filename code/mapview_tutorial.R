@@ -4,6 +4,7 @@ library("mapview")
 library("leafem")
 library("leafgl")
 library("leaflet")
+
 library("sf")
 # Linking to GEOS 3.8.0, GDAL 3.1.0, PROJ 7.0.0
 library("stars")
@@ -128,6 +129,7 @@ mapview(x1, band = 1)
 rst = as(x1, "Raster")[[1]]
 
 mapview(rst)
+mapview(rst, method = "ngb", query.digits = 0)
 
 #' ### mapview structure
 #+ eval=TRUE
@@ -259,7 +261,7 @@ brew = brew[1, ]
 rm(brew)
 
 mapview(breweries)
-brew = breweries
+fran = franconia[, "district"]
 
 mapview::stopWatching()
 
@@ -269,7 +271,7 @@ rm(brew)
 #'
 #' #### mapshot
 #'
-mapviewOptions(fgb = FALSE)
+mapviewOptions(fgb = FALSE) # mapshot doesn't work with fgb yet!
 mymap = mapview(franconia, zcol = "district") + breweries
 mapshot(mymap, url = "/home/timpanse/Desktop/mymap.html")
 mapshot(mymap, file = "/home/timpanse/Desktop/mymap.png")
@@ -278,7 +280,6 @@ mapshot(mymap, file = "/home/timpanse/Desktop/mymap.png",
 
 #' #### viewRGB
 #'
-library(plainview)
 rst = as(x1, "Raster")
 viewRGB(rst)
 viewRGB(rst, r = 4, g = 3, b = 2)
